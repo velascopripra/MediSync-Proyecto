@@ -1,93 +1,105 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importar para navegar
+import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import "../index.css";
 
 export default function Login() {
-  // --- Estados ---
-  const [email, setEmail] = useState(""); // Estado para el campo email
-  const [password, setPassword] = useState(""); // Estado para el campo contraseña
-  const [error, setError] = useState(""); // Estado para mensajes de error
-  const [loading, setLoading] = useState(false); // Estado para indicar carga (opcional)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); // Hook para la navegación
+  const navigate = useNavigate();
 
-  // --- Manejador de envío del formulario ---
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevenir recarga de la página
-    setError(""); // Limpiar errores previos
-    setLoading(true); // Indicar que estamos procesando
-
-    console.log("Enviando datos:", { email, password });
+    event.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
-      // --- Llamada a la API del Backend ---
-      const response = await fetch('http://localhost:3001/api/login', {
-        method: 'POST', // Usamos el método POST
+      const response = await fetch("http://localhost:3001/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json', // ¡Muy importante indicar que enviamos JSON!
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }), // Convertimos los datos a string JSON
+        body: JSON.stringify({ email, password }),
       });
 
-      // Parsear la respuesta JSON del backend
       const data = await response.json();
-      setLoading(false); // Termina la carga
+      setLoading(false);
 
-      // --- Manejar la respuesta ---
       if (response.ok && data.success) {
-        // ¡Login Exitoso!
-        console.log("Login exitoso:", data);
-        // Aquí podrías guardar datos del usuario o un token si el backend lo devolviera
-        // Navegar a la página de perfil (o a donde necesites)
-        navigate('/profile');
+        navigate("/profile");
       } else {
-        // Login Fallido o error del servidor
-        console.error("Error en login:", data.message || "Error desconocido");
         setError(data.message || "Error al intentar iniciar sesión. Intenta de nuevo.");
       }
     } catch (err) {
-      // Error de red o al intentar conectar con el backend
-      setLoading(false); // Termina la carga
-      console.error("Error de conexión:", err);
+      setLoading(false);
       setError("No se pudo conectar con el servidor. Verifica tu conexión.");
     }
   };
 
-  // --- Renderizado del Componente ---
   return (
-    <div className="page-container">
-      <h2>Iniciar sesión</h2>
-      {/* Asociamos los inputs con el estado usando value y onChange */}
-      <input
-        type="email"
-        placeholder="Correo electrónico"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        disabled={loading} // Deshabilitar mientras carga (opcional)
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        disabled={loading} // Deshabilitar mientras carga (opcional)
-      />
-      {/* Mostrar mensaje de error si existe */}
-      {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '10px' }}>{error}</p>}
-      {/* Llamamos a handleSubmit al hacer click en el botón */}
-      <button
-        className="btn-primary"
-        onClick={handleSubmit} // Usamos onClick aquí, o podrías envolver todo en <form onSubmit={handleSubmit}>
-        disabled={loading} // Deshabilitar mientras carga (opcional)
-      >
-        {loading ? "Entrando..." : "Entrar"} {/* Cambiar texto del botón (opcional) */}
-      </button>
+    <div className="login-wrapper">
+      <div className="login-container">
+        {/* Panel izquierdo */}
+        <div className="login-left">
+          <h1>¡Bienveni@!</h1>
+          <p className="welcome-text">Accede a tu cuenta para gestionar tus citas médicas</p>
 
-      <div className="form-link">
-        ¿Olvidaste tu contraseña? <a href="/forgot-password">Recupérala aquí</a>
-      </div>
-      <div className="form-link">
-        ¿No tienes una cuenta? <a href="/register">Regístrate</a>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            className="input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+          />
+
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Contraseña"
+              className="input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={loading}
+            />
+            <span className="toggle-password" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+            </span>
+          </div>
+
+          {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
+
+          <div className="forgot-password">
+            <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button className="btn-login" onClick={handleSubmit} disabled={loading}>
+            {loading ? "Entrando..." : "Iniciar sesión"}
+          </button>
+
+          <div className="signup-link">
+            ¿No tienes una cuenta? <a href="/register">Regístrate</a>
+          </div>
+        </div>
+
+        {/* Panel derecho */}
+        <div className="login-right">
+          <div className="login-right-buttons">
+            <a href="/register" className="btn-text">Registrarse</a>
+            <a href="#" className="btn-outline">Ayuda</a>
+          </div>
+          <div className="login-right-text">
+            <h2>Gestión eficiente de citas médicas con MediSync</h2>
+            <p>
+              MediSync centraliza la administración de citas en la Red de Clínicas Salud Total. 
+              Simplifica la programación, mejora la atención y optimiza cada proceso con tecnología avanzada.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
