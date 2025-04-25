@@ -92,30 +92,38 @@ export default function Register() {
 
   // --- Renderizado del Componente ---
   return (
-    <div className="page-container">
-      <h2>Crear cuenta</h2>
+    <div className="login-wrapper">
+      <div className="login-container">
+        {/* Panel izquierdo */}
+        <div className="login-left">
+          <h1>¡Crea tu cuenta!</h1>
+          <p className="welcome-text">Regístrate para gestionar tus citas médicas</p>
 
-      {/* Mensajes de éxito o error */}
-      {success && <p style={{ color: 'green', textAlign: 'center', marginBottom: '10px' }}>{success}</p>}
-      {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '10px' }}>{error}</p>}
+          <input type="text" placeholder="Nombre de usuario" className="input" />
+          <input type="email" placeholder="Correo electrónico" className="input" />
+          <input type="password" placeholder="Contraseña" className="input" />
 
-      <form onSubmit={handleSubmit}> {/* Usar form y onSubmit */}
-        <input type="text" placeholder="Nombre" value={name} onChange={(e) => setName(e.target.value)} disabled={loading} />
-        <input type="text" placeholder="Apellido" value={lastName} onChange={(e) => setLastName(e.target.value)} disabled={loading} />
-        <input type="email" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} />
-        <input type="text" placeholder="Nombre de usuario" value={username} onChange={(e) => setUsername(e.target.value)} disabled={loading} />
-        <input type="password" placeholder="Contraseña (mín. 6 caracteres)" value={password} onChange={(e) => setPassword(e.target.value)} disabled={loading} />
-        <input type="password" placeholder="Confirmar Contraseña" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} disabled={loading} />
-        <input type="text" placeholder="Pregunta Secreta (ej. ¿Mascota?)" value={secretQuestion} onChange={(e) => setSecretQuestion(e.target.value)} disabled={loading} />
-        <input type="text" placeholder="Respuesta Secreta" value={secretAnswer} onChange={(e) => setSecretAnswer(e.target.value)} disabled={loading} />
+          <button className="btn-login">Registrarse</button>
 
-        <button type="submit" className="btn-primary" disabled={loading}>
-          {loading ? "Registrando..." : "Registrarse"}
-        </button>
-      </form>
+          <div className="signup-link">
+            ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
+          </div>
+        </div>
 
-      <div className="form-link">
-        ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link> {/* Usar Link */}
+        {/* Panel derecho */}
+        <div className="login-right">
+          <div className="login-right-buttons">
+            <a href="/login" className="btn-text">Iniciar sesión</a>
+            <a href="#" className="btn-outline">Ayuda</a>
+          </div>
+          <div className="login-right-text">
+            <h2>Únete a MediSync</h2>
+            <p>
+              Optimiza tu experiencia médica. Gestiona tus citas, mantén tu historial
+              y accede a servicios de salud con eficiencia y tecnología.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
