@@ -5,7 +5,7 @@ export default function Navbar({ toggleSidebar, isSidebarOpen }) {
   return (
     <header className="navbar">
       <div className="navbar-left">
-        <img src="/favicon.png" alt="Logo" className="logo" />
+        <img src="../../src/favicon.png" alt="Logo" className="logo" />
       </div>
 
       <h1 className="navbar-title">MiCuenta</h1>
