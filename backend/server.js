@@ -1,5 +1,6 @@
-import dotenv from 'dotenv'; // <-- CAMBIO: Importa dotenv
-dotenv.config({ path: './.env' });             // <-- CAMBIO: Llama a config() explícitamente
+import dotenv from 'dotenv';
+console.log('Antes de dotenv.config()');
+dotenv.config({ path: './.env' });            
 console.log('>>> Verificando SESSION_SECRET al inicio:', process.env.SESSION_SECRET);
 import express from 'express';
 import cors from 'cors';
@@ -27,7 +28,7 @@ const connectDB = async () => {
 
 // --- Función Principal Asíncrona para Iniciar Todo ---
 const startServer = async () => {
-  await connectDB(); // Espera la conexión a la BD
+  await connectDB(); 
 
   const app = express();
   const PORT = process.env.PORT || 3001;
