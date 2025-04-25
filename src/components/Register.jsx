@@ -4,32 +4,37 @@ import "../index.css"; // Asegúrate que tus estilos estén bien aquí
 
 export default function Register() {
   // --- Estados para cada campo del formulario ---
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(""); // Para confirmar contraseña
-  const [secretQuestion, setSecretQuestion] = useState("");
-  const [secretAnswer, setSecretAnswer] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [dni, setDni] = useState("");
 
   // --- Estados para UI/Errores ---
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(""); // Para mensaje de éxito
   const [loading, setLoading] = useState(false);
 
+  
+
   const navigate = useNavigate(); // Hook para navegación
 
   // --- Manejador de envío ---
   const handleSubmit = async (event) => {
+
+    console.log("first name",firstName)
+    console.log("password",password)
+
     event.preventDefault(); // Prevenir recarga
     setError(""); // Limpiar errores
     setSuccess(""); // Limpiar éxito
     setLoading(true);
 
     // Validación básica en frontend
-    if (!name || !lastName || !email || !username || !password || !confirmPassword || !secretQuestion || !secretAnswer) {
-      setError("Todos los campos son obligatorios.");
+    if (!firstName || !lastName || !email || !password || !confirmPassword || !phoneNumber || !dni) {
+      setError("Todos los campos son obligatorios. 1");
       setLoading(false);
       return;
     }
@@ -46,13 +51,12 @@ export default function Register() {
 
     // Datos a enviar al backend
     const registrationData = {
-      name,
+      firstName,
       lastName,
       email,
-      username,
       password,
-      secretQuestion,
-      secretAnswer
+      phoneNumber,
+      dni,
     };
 
     console.log("Enviando datos de registro:", registrationData);
@@ -99,12 +103,25 @@ export default function Register() {
           <h1>¡Crea tu cuenta!</h1>
           <p className="welcome-text">Regístrate para gestionar tus citas médicas</p>
 
-          <input type="text" placeholder="Nombre de usuario" className="input" />
-          <input type="email" placeholder="Correo electrónico" className="input" />
-          <input type="password" placeholder="Contraseña" className="input" />
-
-          <button className="btn-login">Registrarse</button>
-
+          <input type="text" placeholder="Nombre" className="input" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+          <input type="text" placeholder="Apellido" className="input" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+          <input type="email" placeholder="Correo electrónico" className="input" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type="password" placeholder="Contraseña" className="input" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input type="password" placeholder="Confirmar contraseña" className="input" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+          <input type="text" placeholder="Número de teléfono" className="input" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+          <input type="text" placeholder="DNI" className="input" value={dni} onChange={(e) => setDni(e.target.value)} required />
+          {error && (
+            <div style={{ color: "red", marginTop: "10px" }}>
+              {error}
+            </div>
+          )}
+          {success && (
+            <div style={{ color: "green", marginTop: "10px" }}>
+              {success}
+            </div>
+          )}
+          <button className="btn-login" onClick={handleSubmit}>Registrarse</button>
+          
           <div className="signup-link">
             ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
           </div>

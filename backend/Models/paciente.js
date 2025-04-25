@@ -31,8 +31,6 @@ const pacienteSchema = new mongoose.Schema({
   timestamps: true
 });
 
-pacienteSchema.index({ correo: 1 });
-
 const Paciente = mongoose.model('Paciente', pacienteSchema);
 
 export default Paciente;

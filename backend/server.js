@@ -34,7 +34,7 @@ const startServer = async () => {
   const PORT = process.env.PORT || 3001;
 
   // Middlewares Principales
-  app.use(cors()); // Habilita CORS
+  app.use(cors());
   app.use(express.json()); // Permite parsear cuerpos JSON
 
   // Configuración de express-session
@@ -79,13 +79,14 @@ const startServer = async () => {
   app.post('/api/register', async (req, res) => {
     console.log('--- Register Request Start (Real DB) ---');
     const { email, username, password, name, lastName, secretQuestion, secretAnswer } = req.body;
-    if (!email || !username || !password || !name || !lastName || !secretQuestion || !secretAnswer) { return res.status(400).json({ success: false, message: 'Faltan campos requeridos.' }); }
+    const { phone, dni } = req.body;
+    if (!email || !username || !password || !name || !lastName || !secretQuestion || !secretAnswer || !phone || !dni) { return res.status(400).json({ success: false, message: 'Faltan campos requeridos.' }); }
     try {
       const existingPaciente = await Paciente.findOne({ correo: email.toLowerCase() });
       const existingCredenciales = await Credenciales.findOne({ username: username.toLowerCase() });
       if (existingPaciente) { return res.status(409).json({ success: false, message: 'El correo electrónico ya está registrado.' }); }
       if (existingCredenciales) { return res.status(409).json({ success: false, message: 'El nombre de usuario ya está registrado.' }); }
-      const newPaciente = new Paciente({ nombre: name, apellido: lastName, correo: email.toLowerCase() });
+      const newPaciente = new Paciente({ nombre: name, apellido: lastName, correo: email.toLowerCase(), telefono: phone, dni: dni });
       const savedPaciente = await newPaciente.save();
       console.log('Paciente guardado:', savedPaciente._id);
       try {

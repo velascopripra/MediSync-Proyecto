@@ -50,8 +50,6 @@ const credencialesSchema = new mongoose.Schema({
   timestamps: true // Añade createdAt y updatedAt
 });
 
-// Índice para búsquedas rápidas por username
-credencialesSchema.index({ username: 1 });
 // Índice para buscar credenciales por el ID del usuario asociado
 credencialesSchema.index({ usuario_id: 1 });
 
