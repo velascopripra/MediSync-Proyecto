@@ -8,8 +8,8 @@ const pacienteSchema = new mongoose.Schema({
   },
   apellido: {
     type: String,
-    required: [true, 'El apellido es obligatorio.'],
-    trim: true
+    trim: true,
+    default: null 
   },
   fechaNacimiento: {
     type: Date
