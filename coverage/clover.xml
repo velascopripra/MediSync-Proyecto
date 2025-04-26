@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1745708834305" clover="3.2.0">
-  <project timestamp="1745708834306" name="All files">
+<coverage generated="1745710205563" clover="3.2.0">
+  <project timestamp="1745710205563" name="All files">
     <metrics statements="229" coveredstatements="94" conditionals="208" coveredconditionals="75" methods="42" coveredmethods="18" elements="479" coveredelements="187" complexity="0" loc="229" ncloc="229" packages="3" files="11" classes="11"/>
     <package name="src">
       <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -217,19 +217,19 @@
       </file>
       <file name="Register.jsx" path="C:\Users\William\Documents\GitHub\INGESOFT2\MediSync-Proyecto\src\components\Register.jsx">
         <metrics statements="37" coveredstatements="27" conditionals="24" coveredconditionals="14" methods="7" coveredmethods="4"/>
-        <line num="9" count="22" type="stmt"/>
-        <line num="12" count="22" type="stmt"/>
-        <line num="23" count="22" type="stmt"/>
-        <line num="24" count="22" type="stmt"/>
-        <line num="27" count="22" type="stmt"/>
-        <line num="29" count="22" type="stmt"/>
-        <line num="31" count="22" type="stmt"/>
-        <line num="34" count="22" type="stmt"/>
-        <line num="35" count="15" type="stmt"/>
-        <line num="37" count="15" type="stmt"/>
-        <line num="42" count="15" type="stmt"/>
-        <line num="43" count="15" type="stmt"/>
-        <line num="47" count="22" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
+        <line num="23" count="16" type="stmt"/>
+        <line num="24" count="16" type="stmt"/>
+        <line num="27" count="16" type="stmt"/>
+        <line num="29" count="16" type="stmt"/>
+        <line num="31" count="16" type="stmt"/>
+        <line num="34" count="16" type="stmt"/>
+        <line num="35" count="11" type="stmt"/>
+        <line num="37" count="11" type="stmt"/>
+        <line num="42" count="11" type="stmt"/>
+        <line num="43" count="11" type="stmt"/>
+        <line num="47" count="16" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
@@ -251,7 +251,7 @@
         <line num="101" count="0" type="stmt"/>
         <line num="102" count="0" type="stmt"/>
         <line num="105" count="1" type="stmt"/>
-        <line num="109" count="22" type="stmt"/>
+        <line num="109" count="16" type="stmt"/>
         <line num="172" count="0" type="stmt"/>
         <line num="194" count="0" type="stmt"/>
       </file>
