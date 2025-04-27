@@ -2,7 +2,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests-e2e', // Directorio donde estarán tus pruebas E2E
+  testDir: './src/E2E/', // Directorio donde estarán tus pruebas E2E
   fullyParallel: true, // Ejecutar pruebas en paralelo
   /* Reintentar en CI solamente */
   retries: process.env.CI ? 2 : 0,
